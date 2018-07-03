@@ -3,37 +3,35 @@ BluFi
 
 Overview
 --------
-The BluFi for ESP32 is a Wi-Fi network configuration function via Bluetooth channel. It provides a secure protocol to pass Wi-Fi configuration and credentials to the ESP32. Using this information ESP32 can then e.g. connect to an AP or establish a SoftAP.
+BluFi for ESP32 is a Wi-Fi network configuration function via Bluetooth channel. 
+It provides a secure protocol to pass Wi-Fi configuration and credential changes to ESP32. 
+ESP32 can then connect to an AP or establish a SoftAP.
 
 Fragmenting, data encryption, checksum verification in the BluFi layer are the key elements of this process.
 
-You can customize symmetric encryption, asymmetric encryption and checksum support customization. Here we use the DH algorithm for key negotiation, 128-AES algorithm for data encryption, and CRC16 algorithm for checksum verification.
+You can customize symmetric encryption, asymmetric encryption and checksum. 
+Here we use the DH algorithm for key negotiation, 128-AES algorithm for data encryption, and CRC16 algorithm for checksum verification.
 
-The BluFi Flow
+BluFi Flow
 ---------------
-The BluFi networking flow includes the configuration of the SoftAP and Station.
+BluFi networking flow includes configuration of the SoftAP and Station.
 
 The following uses Station as an example to illustrate the core parts of the procedure, including broadcast, connection, service discovery, negotiation of the shared key, data transmission, connection status backhaul.
 
-1. Set the ESP32 into GATT Server mode and then it will send broadcasts with specific *advertising data*. You can customize this broadcast as needed, which is not a part of the BluFi Profile.
+Step by step illustration:
 
-2. Use the App installed on the mobile phone to search for this particular broadcast. The mobile phone will connect to ESP32 as the GATT Client once the broadcast is confirmed. The App used during this part is up to you.
-
-3. After the GATT connection is successfully established, the mobile phone will send a data frame for key negotiation to ESP32 (see the section :ref:`frame_formats` for details).
-
-4. After ESP32 receives the data frame of key negotiation, it will parse the content according to the user-defined negotiation method.
-
-5. The mobile phone works with ESP32 for key negotiation using the encryption algorithms such as DH, RSA or ECC.
-
-6. After the negotiation process is completed, the mobile phone will send a control frame for security-mode setup to ESP32.
-
-7. When receiving this control frame, ESP32 will be able to encrypt and decrypt the communication data using the shared key and the security configuration.
-
-8. The mobile phone sends the data frame defined in the section of :ref:`frame_formats`，with the Wi-Fi configuration information to ESP32, including SSID, password, etc.
-
-9. The mobile phone sends a control frame of Wi-Fi connection request to ESP32. When receiving this control frame, ESP32 will regard the communication of essential information as done and get ready to connect to the Wi-Fi.
-
-10. After connecting to the Wi-Fi, ESP32 will send a control frame of Wi-Fi connection status report to the mobile phone，to report the connection status. At this point the networking procedure is completed.
+1.  Set ESP32 to GATT Server mode and then it will send broadcasts with specific *advertising data*. Customization is available as needed.
+2.  Use the App on the mobile phone to search for the broadcast. 
+3.  The mobile phone connects to ESP32 as a GATT Client once the broadcast is confirmed.
+4.  Send a data frame for key negotiation from the mobile phone to ESP32 (see the section :ref:`frame_formats` for details).
+5.  ESP32 then parse the content according to the user-defined negotiation method.
+6.  The mobile phone works with ESP32 for key negotiation using the encryption algorithms such as DH, RSA or ECC.
+7.  Control frame is sent from mobile phone for security-mode setup to ESP32.
+8.  ESP32 then encrypt and decrypt the communication data using the shared key and security configuration.
+9.  Data frame defined in the section of :ref:`frame_formats`，with the Wi-Fi configuration information are then sent by mobile phone to ESP32, including SSID, password, etc.
+10. The mobile phone sends a control frame of Wi-Fi connection request to ESP32. 
+11. ESP32 then regards the communication of essential information as done and gets ready to connect to Wi-Fi.
+12. A control frame of Wi-Fi connection status report will be sent to the mobile phone to report the connection status. 
 
 .. note::
 

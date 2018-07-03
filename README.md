@@ -1,16 +1,16 @@
 # Espressif IoT Development Framework
 
-#huangwei add
+
 
 [![alt text](https://readthedocs.org/projects/docs/badge/?version=latest "Documentation Status")](https://docs.espressif.com/projects/esp-idf/en/latest/?badge=latest)
 
 ESP-IDF is the official development framework for the [ESP32](https://espressif.com/en/products/hardware/esp32/overview) chip.
 
-# Developing With the ESP-IDF
+# Developing With ESP-IDF
 
 ## Setting Up ESP-IDF
 
-See setup guides for detailed instructions to set up the ESP-IDF:
+See setup guides for detailed instructions to set up ESP-IDF:
 
 * [Windows Setup Guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/windows-setup.html)
 * [Mac OS Setup Guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/macos-setup.html)
@@ -26,15 +26,15 @@ Once you've found the project you want to work with, change to its directory and
 
 `make menuconfig`
 
-* Opens a text-based configuration menu for the project.
+* Open a text-based configuration menu for the project.
 * Use up & down arrow keys to navigate the menu.
-* Use Enter key to go into a submenu, Escape key to go out or to exit.
-* Type `?` to see a help screen. Enter key exits the help screen.
-* Use Space key, or `Y` and `N` keys to enable (Yes) and disable (No) configuration items with checkboxes "`[*]`"
-* Pressing `?` while highlighting a configuration item displays help about that item.
-* Type `/` to search the configuration items.
+* Use Enter key to go into a submenu and Escape key to go out or to exit.
+* Type `?` to see a help screen. (Use Enter key to exit.)
+* Use Space key or `Y` and `N` keys to enable (Yes) and disable (No) configuration items with checkboxes "`[*]`".
+* Pressing `?` when a configuration item is highlighted will display the help info about that item.
+* Type `/` to search configuration items.
 
-Once done configuring, press Escape multiple times to exit and say "Yes" to save the new configuration when prompted.
+Once done configuring, press Escape key multiple times to exit and say "Yes" to save the new configuration when prompted.
 
 ## Compiling the Project
 
@@ -44,13 +44,13 @@ Once done configuring, press Escape multiple times to exit and say "Yes" to save
 
 ## Flashing the Project
 
-When `make all` finishes, it will print a command line to use esptool.py to flash the chip. However you can also do this from make by running:
+When `make all` finishes, it will print a command line to use esptool.py to flash the chip. You can also do this from make by running:
 
 `make flash`
 
 This will flash the entire project (app, bootloader and partition table) to a new chip. The settings for serial port flashing can be configured with `make menuconfig`.
 
-You don't need to run `make all` before running `make flash`, `make flash` will automatically rebuild anything which needs it.
+You don't need to run `make all` before running `make flash`. `make flash` will automatically rebuild anything which needs it.
 
 ## Viewing Serial Output
 
@@ -96,7 +96,7 @@ The simplest way to use the partition table is to `make menuconfig` and choose o
 * "Single factory app, no OTA"
 * "Factory app, two OTA definitions"
 
-In both cases the factory app is flashed at offset 0x10000. If you `make partition_table` then it will print a summary of the partition table.
+In both cases the factory app is flashed at offset 0x10000. If you `make partition_table`, it will print a summary of the partition table.
 
 For more details about partition tables and how to create custom variations, view the [`docs/en/api-guides/partition-tables.rst`](docs/en/api-guides/partition-tables.rst) file.
 
@@ -110,7 +110,7 @@ This can be combined with other targets, ie `make erase_flash flash` will erase 
 
 * Documentation for the latest version: https://docs.espressif.com/projects/esp-idf/. This documentation is built from the [docs directory](docs) of this repository.
 
-* The [esp32.com forum](https://esp32.com/) is a place to ask questions and find community resources.
+* [esp32.com forum](https://esp32.com/) is a place to ask questions and find community resources.
 
 * [Check the Issues section on github](https://github.com/espressif/esp-idf/issues) if you find a bug or have a feature request. Please check existing Issues before opening a new one.
 
