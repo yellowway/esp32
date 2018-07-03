@@ -20,18 +20,18 @@ The following uses Station as an example to illustrate the core parts of the pro
 
 Step by step illustration:
 
--Set ESP32 to GATT Server mode and then it will send broadcasts with specific *advertising data*. Customization is available as needed.
--Use the App on the mobile phone to search for the broadcast. 
--The mobile phone connects to ESP32 as a GATT Client once the broadcast is confirmed.
--Send a data frame for key negotiation from the mobile phone to ESP32 (see the section :ref:`frame_formats` for details).
--ESP32 then parse the content according to the user-defined negotiation method.
--The mobile phone works with ESP32 for key negotiation using the encryption algorithms such as DH, RSA or ECC.
--Control frame is sent from mobile phone for security-mode setup to ESP32.
--ESP32 then encrypt and decrypt the communication data using the shared key and security configuration.
--Data frame defined in the section of :ref:`frame_formats`，with the Wi-Fi configuration information are then sent by mobile phone to ESP32, including SSID, password, etc.
--The mobile phone sends a control frame of Wi-Fi connection request to ESP32. 
--ESP32 then regards the communication of essential information as done and gets ready to connect to Wi-Fi.
--A control frame of Wi-Fi connection status report will be sent to the mobile phone to report the connection status. 
+1. Set ESP32 to GATT Server mode and then it will send broadcasts with specific *advertising data*. Customization is available as needed.
+2. Use the App on the mobile phone to search for the broadcast. 
+3. The mobile phone connects to ESP32 as a GATT Client once the broadcast is confirmed.
+4. Send a data frame for key negotiation from the mobile phone to ESP32 (see the section :ref:`frame_formats` for details).
+5. ESP32 then parse the content according to the user-defined negotiation method.
+6. The mobile phone works with ESP32 for key negotiation using the encryption algorithms such as DH, RSA or ECC.
+7. Control frame is sent from mobile phone for security-mode setup to ESP32.
+8. ESP32 then encrypt and decrypt the communication data using the shared key and security configuration.
+9. Data frame defined in the section of :ref:`frame_formats`，with the Wi-Fi configuration information are then sent by mobile phone to    ESP32, including SSID, password, etc.
+10.The mobile phone sends a control frame of Wi-Fi connection request to ESP32. 
+11.ESP32 then regards the communication of essential information as done and gets ready to connect to Wi-Fi.
+12.A control frame of Wi-Fi connection status report will be sent to the mobile phone to report the connection status. 
 
 .. note::
 
