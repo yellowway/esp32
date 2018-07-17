@@ -91,7 +91,7 @@ The frame format with no fragment (8 bit)：
 | MSB - CheckSum  | 2              |
 +-----------------+----------------+
 
-If the **Frame Ctrl** bit is enabled, the **Total length** bit indicates the length of remaining part of the frame. It can tell the remote how much memory needs to be alloced.
+If the **Frame Ctrl** bit is enabled, the **Total length** bit indicates the length of remaining part of the frame. It can tell the remote how much memory needs to be allocated.
 
 The frame format with fragments（8 bit）：
 
@@ -386,14 +386,14 @@ The format of Ack Frame（8 bit）：
 
 6. CheckSum
 
-   This field takes 2 bytes that is used to check "sequence + data length + clear text data".
+   This field takes 2 bytes that are used to check "sequence + data length + clear text data".
 
 The Security Implementation of ESP32
 -------------------------------------
 
 1. Securing data
 
-   To ensure that the transmission of the Wi-Fi SSID and password is secure, the message needs to be encrypted using symmetric encryption algorithms, such as AES, DES and so on. Before using symmetric encryption algorithms, the devices are required to negotiate (or generate) a shared key using an asymmetric encryption algorithm (DH, RSA, ECC, etc).
+   To ensure that the transmission of the Wi-Fi SSID and password are secure, the message needs to be encrypted using symmetric encryption algorithms, such as AES, DES and so on. Before using symmetric encryption algorithms, the devices are required to negotiate (or generate) a shared key using an asymmetric encryption algorithm (DH, RSA, ECC, etc).
 
 2. Ensuring data integrity
 
@@ -401,13 +401,15 @@ The Security Implementation of ESP32
 
 3. Securing identity (signature)
 
-   Algorithm like RSA can be used to secure identity. But for DH, it needs other algorithms as an companion for signature.
+   Algorithm like RSA can be used to secure identity. But for DH, it needs other algorithms as a companion for signature.
 
 4. Replay attack prevention
 
    It is added to the Sequence field and used during the checksum verification.
 
-   For the coding of ESP32, you can determine and develop the security processing, such as key negotiation. The mobile application sends the negotiation data to ESP32 and then the data will be sent to the application layer for processing. If the application layer does not process it, you can use the DH encryption algorithm provided by BluFi to negotiate the key.
+   For the coding of ESP32, you can determine and develop the security processing, such as key negotiation. 
+   The mobile application sends the negotiation data to ESP32 and then the data will be sent to the application layer for processing. 
+   If the application layer does not process it, you can use the DH encryption algorithm provided by BluFi to negotiate the key.
   
    The application layer needs to register several security-related functions to BluFi:
 
