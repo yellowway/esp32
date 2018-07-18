@@ -34,15 +34,28 @@ Application binary image is loaded from flash starting at address 0x1000. First 
 Second stage bootloader
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-In ESP-IDF, the binary image which resides at offset 0x1000 in flash is the second stage bootloader. Second stage bootloader source code is available in components/bootloader directory of ESP-IDF. Note that this arrangement is not the only one possible with the ESP32 chip. It is possible to write a fully featured application which would work when flashed to offset 0x1000, but this is out of scope of this document. Second stage bootloader is used in ESP-IDF to add flexibility to flash layout (using partition tables), and allow for various flows associated with flash encryption, secure boot, and over-the-air updates (OTA) to take place.
+Def: the binary image which resides at offset 0x1000 in flash is the second stage bootloader. 
 
-When the first stage bootloader is finished checking and loading the second stage bootloader, it jumps to the second stage bootloader entry point found in the binary image header.
+- Second stage bootloader source code is available in components/bootloader directory of ESP-IDF. 
+- This arrangement is not the only one with the ESP32 chip. It is possible to write a fully featured application which would work when flashed to offset 0x1000, but this is out of the scope of this document. 
+- Second stage bootloader is used in ESP-IDF to add flexibility to flash layout (using partition tables), and allow for various flows associated with flash encryption, secure boot, and over-the-air updates (OTA) to take place.
 
-Second stage bootloader reads the partition table found at offset 0x8000. See :doc:`partition tables <partition-tables>` documentation for more information. The bootloader finds factory and OTA partitions, and decides which one to boot based on data found in *OTA info* partition. 
+- When the first stage bootloader is finished checking and loading the second stage bootloader, it jumps to the latter's entry point found in the binary image header.
 
-For the selected partition, second stage bootloader copies data and code sections which are mapped into IRAM and DRAM to their load addresses. For sections which have load addresses in DROM and IROM regions, flash MMU is configured to provide the correct mapping. Note that the second stage bootloader configures flash MMU for both PRO and APP CPUs, but it only enables flash MMU for PRO CPU. Reason for this is that second stage bootloader code is loaded into the memory region used by APP CPU cache. The duty of enabling cache for APP CPU is passed on to the application. Once code is loaded and flash MMU is set up, second stage bootloader jumps to the application entry point found in the binary image header.
+- Second stage bootloader reads the partition table found at offset 0x8000. See :doc:`partition tables <partition-tables>` documentation for more information. The bootloader finds factory and OTA partitions, and decides which one to boot based on data found in *OTA info* partition. 
 
-Currently it is not possible to add application-defined hooks to the bootloader to customize application partition selection logic. This may be required to load different application image depending on a state of a GPIO, for example. Such customization features will be added to ESP-IDF in the future. For now, bootloader can be customized by copying bootloader component into application directory and making necessary changes there. ESP-IDF build system will compile the component in application directory instead of ESP-IDF components directory in this case.
+- For the selected partition, second stage bootloader copies data and code sections which are mapped into IRAM and DRAM to their load addresses. For sections which have load addresses in DROM and IROM regions, flash MMU is configured to provide the correct mapping. 
+
+- Note that the second stage bootloader configures flash MMU for both PRO and APP CPUs, but it only enables flash MMU for PRO CPU. 
+- Reason for this is that second stage bootloader code is loaded into the memory used by APP CPU cache. 
+- The duty of enabling cache for APP CPU is passed on to the application. 
+- Once code is loaded and flash MMU is set up, second stage bootloader jumps to the application entry point found in the binary image header.
+
+- It is not possible to add application-defined hooks to the bootloader to customize application partition selection logic. This may be required to load different application images depending on a state of a GPIO. Such customization features will be added to ESP-IDF. 
+
+Bootloader can be customized by copying bootloader component into application directory and making necessary changes there. 
+
+ESP-IDF build system will compile the component in application directory instead of ESP-IDF components directory in this case.
 
 Application startup
 ^^^^^^^^^^^^^^^^^^^
