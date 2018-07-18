@@ -3,11 +3,11 @@ ULP coprocessor instruction set
 
 This document provides details about the instructions used by ESP32 ULP coprocessor assembler.
 
-ULP coprocessor has 4 16-bit general purpose registers, labeled R0, R1, R2, R3. It also has an 8-bit counter register (stage_cnt) which can be used to implement loops. Stage count regiter is accessed using special instructions.
+ULP coprocessor has 4 16-bit general purpose registers, labeled R0, R1, R2, R3. It also has an 8-bit counter register (stage_cnt) which can be used to implement loops. Stage count register is accessed using special instructions.
 
 ULP coprocessor can access 8k bytes of RTC_SLOW_MEM memory region. Memory is addressed in 32-bit word units. It can also access peripheral registers in RTC_CNTL, RTC_IO, and SENS peripherals.
 
-All instructions are 32-bit. Jump instructions, ALU instructions, peripheral register and memory access instructions are executed in 1 cycle. Instructions which work with peripherals (TSENS, ADC, I2C) take variable number of cycles, depending on peripheral operation.
+All instructions are 32-bit. Jump instructions, ALU instructions, peripheral register and memory access instructions are executed in 1 cycle. Instructions which work with peripherals (TSENS, ADC, I2C) take variable numbers of cycles, depending on peripheral operation.
 
 The instruction syntax is case insensitive. Upper and lower case letters can be used and intermixed arbitrarily. This is true both for register names and instruction names.
 
@@ -26,7 +26,7 @@ Consider the following example program::
           MOVE R1, loop
           JUMP R1
 
-When this program is assembled and linked, address of label ``loop`` will be equal to 16 (expressed in bytes). However `JUMP` instruction expects the address stored in register to be expressed in 32-bit words. To account for this common use case, assembler will convert the address of label `loop` from bytes to words, when generating ``MOVE`` instruction, so the code generated code will be equivalent to::
+When this program is assembled and linked, address of label ``loop`` will be equal to 16 (expressed in bytes). `JUMP` instruction expects the address stored in register to be expressed in 32-bit words. To account for this common use case, assembler will convert the address of label `loop` from bytes to words, when generating ``MOVE`` instruction, so the code generated code will be equivalent to::
 
   0000    NOP
   0004    NOP
@@ -73,7 +73,7 @@ ULP coprocessor is clocked from RTC_FAST_CLK, which is normally derived from the
     uint32_t rtc_8md256_period = rtc_clk_cal(RTC_CAL_8MD256, 100);
     uint32_t rtc_fast_freq_hz = 1000000ULL * (1 << RTC_CLK_CAL_FRACT) * 256 / rtc_8md256_period;
 
-ULP coprocessor needs certain number of clock cycles to fetch each instuction, plus certain number of cycles to execute it, depending on the instruction. See description of each instruction below for details on the execution time.
+ULP coprocessor needs certain number of clock cycles to fetch each instuction, plus certain number of cycles to execute it, depending on the instructions. See description of each instruction below for details on the execution time.
 
 Instruction fetch time is:
 
