@@ -3,9 +3,23 @@ ESP-MESH
 
 Overview
 --------
-ESP-MESH is a "multi-hop" network, meaning that two or more wireless hops (intermediate connections of two Internet devices) are needed for conveying information from a source to a destination. Mesh networking (or mesh routing) is a type of network topology in which a device (node) transmits its own data, while serving as a relay for other nodes at the same time. The prerequisite for successful wireless mesh routing is that all mesh nodes need to be interconnected on the physical layer first. The mesh routing algorithm, then, chooses the transmission path among these physical-layer links. As a highly reliable, widely-covered Wireless Local-Area Network (WLAN) network, the ESP-MESH is ideal for wireless solutions covering a large open area (both outdoors and indoors).
+ESP-MESH is a "multi-hop" network. Multiple wireless hops between two devices are needed for conveying information. Mesh networking is a type of network in which a node transmits its own data while serving as a relay for other nodes. 
 
-ESP-MESH network is different from traditional wireless networks. The traditional wireless access technology implements a point-to-point or multipoint topology. There is generally one central node in such a topology, for example, a base station in a mobile communication system or an access point (AP) in an 802.11 WLAN. The central node and each wireless terminal are connected through single-hop wireless routing which controls each wireless terminal's access to the wireless network. Besides, the central node is connected to the backbone network through a wired link. In comparison, the ESP-MESH adopts a tree topology, with a root node, intermediate nodes and leaf nodes, making the network more expandable and fault-tolerant. Any mesh device on the network can compete to be the root node. Should the root node break down, the network will automatically select a new root node. This effectively decreases the tree topology’s dependence on a single node and allows every node to participate in the relay of information.
+    - The prerequisite for a successful wireless mesh routing is that all mesh nodes need to be interconnected on the physical layer           first. 
+    - The mesh routing algorithm chooses the transmission path among these physical-layer links. 
+    - As a Wireless Local-Area Network (WLAN), the ESP-MESH is ideal for wireless solutions covering a large open area.
+
+ESP-MESH network is different from traditional wireless networks:
+
+    - The traditional networks implement a multipoint topology. 
+        * There is one central node in such a topology. 
+        * The central node and each wireless terminal are connected through single-hop wireless routing which controls each wireless               terminal's access to the wireless network. 
+        * The central node is connected to the backbone network through a wired link. 
+    
+    - The ESP-MESH adopts a tree topology.
+        * There are root nodes, intermediate nodes and leaf nodes, making the network more expandable and fault-tolerant. 
+        * Any mesh device on the network can compete to be the root node. 
+        * Should the root node break down, a new root node will be selected. This allows every node to participate in transmitting                 information.
 
 .. figure:: ../../_static/mesh_network_architecture.png
     :align: center
